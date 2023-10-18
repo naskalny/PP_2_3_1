@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
 
-
 @Controller
 @RequestMapping("/user")
 
@@ -24,13 +23,13 @@ public class UserController {
         return "user/index";
     }
 
-    @GetMapping("/getUser")
+    @GetMapping(value = "/getUser")
     public String getUser(@RequestParam(name = "id") int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         return "user/details";
     }
 
-    @GetMapping("/create")
+    @GetMapping(value = "/create")
     public String addUser(@ModelAttribute("user") User user) {
         return "user/create";
     }
@@ -41,19 +40,19 @@ public class UserController {
         return "redirect:/user";
     }
 
-    @GetMapping("/edit")
+    @GetMapping(value = "/edit")
     public String edit(@RequestParam(name = "id") int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         return "user/edit";
     }
 
-    @PostMapping("/update")
+    @PostMapping(value = "/update")
     public String update(@ModelAttribute("person") User user) {
         userService.editUser(user);
         return "redirect:/user";
     }
 
-    @GetMapping("/delete")
+    @GetMapping(value = "/delete")
     public String delete(@RequestParam(name = "id") int id) {
         userService.removeUser(id);
         return "redirect:/user";
